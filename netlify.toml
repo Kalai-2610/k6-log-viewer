@@ -1,4 +1,5 @@
 [build]
+  base = "K6 Log Viewer"
   command = "npm run build"
   publish = ".next"
 
