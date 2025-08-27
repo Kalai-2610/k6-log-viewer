@@ -76,7 +76,7 @@ export default function Home() {
     <>
       <div className={styles.Header}>K6 Log Viewer</div>
       <div className={styles.Controllers}>
-        <label className="file">
+        <label className={styles.File}>
           <input type="file" accept=".txt" onChange={handleFileUpload} />
         </label>
 
