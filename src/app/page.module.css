@@ -1,0 +1,143 @@
+.Header {
+  display: flex;
+  font-size: large;
+  justify-content: center;
+  padding: 1em 1em 0em 1em;
+}
+
+.Controllers {
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  padding: 1em 1em 0em 1em;
+  align-items: center;
+}
+
+.LevelFilter, .MessageFilter,.VUFilter, .ITERFilter, .Clear{
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+.LevelFilter{
+  border: none;
+  font-weight: bold;
+  margin: 0 1em 0 0;
+}
+
+.MessageFilter{
+  flex: 1;
+  font-weight: bold;
+  padding: 0.4em 0.6em;
+  border: solid #ededed;
+  border-width: 0 0 1px 0;
+}
+
+.VUFilter, .ITERFilter {
+  border: none;
+  font-weight: bold;
+  margin: 0 0 0 1em;
+  padding: 0.4em 0.6em;
+  text-align: center;
+  width: 4em;
+  border: solid #ededed;
+  border-width: 0 0 1px 0;
+}
+
+.Clear {
+  border: none;
+  border-radius: 4px;
+  margin: 0 0 0 1em;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.LogsHeader {
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 1em 1em 1em;
+  font-weight: bold;
+}
+
+.Logs {
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0em 1em 1em 1em;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.Row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2em;
+  flex-wrap: nowrap;
+}
+
+.Column {
+  display: flex;
+  padding: 0.2em 0.2em;
+}
+
+.Time {
+  flex: 1;
+  min-width: 16em;
+  max-width: 16em;
+  justify-content: center;
+}
+
+.Level {
+  flex: 1;
+  min-width: 4em;
+  max-width: 4em;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.Message {
+  flex: 1;
+}
+
+.VU {
+  flex: 1;
+  min-width: 3em;
+  max-width: 3em;
+  justify-content: center;
+}
+
+.ITER {
+  flex: 1;
+  min-width: 3em;
+  max-width: 3em;
+  justify-content: center;
+}
+
+.DUBUG {
+  color: whitesmoke;
+}
+.INFO {
+  color: #60A5FA;
+}
+.ERROR {
+  color: #FF4C4C;
+}
+.WARN {
+  color: #FFD93D;
+}
+
+.VUFilter::-webkit-outer-spin-button,
+.VUFilter::-webkit-inner-spin-button,
+.ITERFilter::-webkit-outer-spin-button,
+.ITERFilter::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.VUFilter, .ITERFilter {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
