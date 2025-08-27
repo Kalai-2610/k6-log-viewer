@@ -32,7 +32,7 @@ export default function Home() {
             let date = new Date(obj.time).toISOString();
             return {
               time: date,
-              level: obj.level?.toUpperCase().replace("WARNING", "WARN") || '',
+              level: obj.level?.toUpperCase().replace('WARNING', 'WARN') || '',
               message: obj.msg?.toString() || '',
               VU: obj?.VU,
               ITER: obj?.ITER,
@@ -76,16 +76,14 @@ export default function Home() {
     <>
       <div className={styles.Header}>K6 Log Viewer</div>
       <div className={styles.Controllers}>
-        <label className={styles.File}>
-          <input type="file" accept=".txt" onChange={handleFileUpload} />
-        </label>
+        <input type="file" accept=".txt" onChange={handleFileUpload} />
 
         {/* Level filter */}
         <select
           className={styles.LevelFilter}
           value={levelFilter}
           onChange={(e) => setLevelFilter(e.target.value)}
-          style={{display: file? 'flex': 'none'}}
+          style={{ display: file ? 'flex' : 'none' }}
         >
           <option value="">All Levels</option>
           <option value="ERROR">ERROR</option>
@@ -101,7 +99,7 @@ export default function Home() {
           placeholder="Filter by message"
           value={msgFilter}
           onChange={(e) => setMsgFilter(e.target.value)}
-          style={{display: file? 'flex': 'none'}}
+          style={{ display: file ? 'flex' : 'none' }}
         />
 
         {/* VU filter */}
@@ -113,7 +111,7 @@ export default function Home() {
           onChange={(e) => setVuFilter(e.target.value)}
           min={0}
           max={10000}
-          style={{display: file? 'flex': 'none'}}
+          style={{ display: file ? 'flex' : 'none' }}
         />
 
         {/* ITER filter */}
@@ -125,13 +123,13 @@ export default function Home() {
           onChange={(e) => setIterFilter(e.target.value)}
           min={0}
           max={100}
-          style={{display: file? 'flex': 'none'}}
+          style={{ display: file ? 'flex' : 'none' }}
         />
 
         {/* Clear */}
         <button
           className={styles.Clear}
-          style={{display: file? 'flex': 'none'}}
+          style={{ display: file ? 'flex' : 'none' }}
           onClick={() => {
             setLevelFilter('');
             setMsgFilter('');
@@ -142,7 +140,10 @@ export default function Home() {
           Clear
         </button>
       </div>
-      <div className={styles.LogsHeader} style={{display: file? 'flex': 'none'}}>
+      <div
+        className={styles.LogsHeader}
+        style={{ display: file ? 'flex' : 'none' }}
+      >
         <div className={styles.Row}>
           <div className={`${styles.Column} ${styles.Time}`}>TimeStamp</div>
           <div className={`${styles.Column} ${styles.Level}`}>Level</div>
@@ -152,7 +153,7 @@ export default function Home() {
         </div>
         <hr />
       </div>
-      <div className={styles.Logs} style={{display: file? 'flex': 'none'}}>
+      <div className={styles.Logs} style={{ display: file ? 'flex' : 'none' }}>
         {filteredLogs.map((item, index) => (
           <div className={styles.Row} key={index}>
             <div className={`${styles.Column} ${styles.Time}`}>{item.time}</div>

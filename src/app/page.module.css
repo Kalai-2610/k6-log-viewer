@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.File, .LevelFilter, .MessageFilter,.VUFilter, .ITERFilter, .Clear{
+.LevelFilter, .MessageFilter,.VUFilter, .ITERFilter, .Clear{
   color: var(--foreground);
   background-color: var(--background);
 }
