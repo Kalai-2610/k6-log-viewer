@@ -24,7 +24,7 @@
 }
 
 .MessageFilter{
-  flex: 1;
+  flex: 3;
   font-weight: bold;
   padding: 0.4em 0.6em;
   border: solid #ededed;
@@ -82,14 +82,13 @@
 }
 
 .Time {
-  flex: 1;
-  min-width: 16em;
+  flex: 3;
   max-width: 16em;
   justify-content: center;
 }
 
 .Level {
-  flex: 1;
+  flex: 2;
   min-width: 4em;
   max-width: 4em;
   justify-content: center;
@@ -97,7 +96,7 @@
 }
 
 .Message {
-  flex: 1;
+  flex: 8;
 }
 
 .VU {
@@ -140,4 +139,20 @@
 .VUFilter, .ITERFilter {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+@media (width < 50em) {
+  .Controllers {
+    flex-wrap: wrap;
+  }
+
+  .VU, .ITER {
+    display: none;
+    /* visibility: hidden; */
+  }
+}
+
+.File {
+  flex: 1;
+  max-width: 16em;
 }

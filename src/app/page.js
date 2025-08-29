@@ -29,13 +29,15 @@ export default function Home() {
             const obj = JSON.parse(line);
 
             // Format time with dynamic timezone
-            let date = new Date(obj.time).toISOString();
+            let date = new Date(obj.time).toISOString().replace("T", " ").replace(".000Z", "");
+            let msg = JSON.parse(obj.msg)
+
             return {
               time: date,
               level: obj.level?.toUpperCase().replace('WARNING', 'WARN') || '',
-              message: obj.msg?.toString() || '',
-              VU: obj?.VU,
-              ITER: obj?.ITER,
+              message: msg?.msg,
+              VU: msg?.VU,
+              ITER: msg?.ITER,
             };
           } catch (err) {
             console.error('Invalid log line:', line);
@@ -76,7 +78,7 @@ export default function Home() {
     <>
       <div className={styles.Header}>K6 Log Viewer</div>
       <div className={styles.Controllers}>
-        <input type="file" accept=".txt" onChange={handleFileUpload} />
+        <input className={styles.File} type="file" accept=".txt" onChange={handleFileUpload} />
 
         {/* Level filter */}
         <select
