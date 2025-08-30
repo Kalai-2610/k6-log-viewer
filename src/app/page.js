@@ -29,10 +29,7 @@ export default function Home() {
             const obj = JSON.parse(line);
 
             // Format time with dynamic timezone
-            let date = new Date(obj.time)
-              .toISOString()
-              .replace('T', ' ')
-              .replace('.000Z', '');
+            let date = new Date(obj.time).toISOString().replace('T', ' ').replace('.000Z', '');
             let msg = {};
             try {
               msg = JSON.parse(obj.msg);
@@ -89,12 +86,7 @@ export default function Home() {
     <>
       <div className={styles.Header}>K6 Log Viewer</div>
       <div className={styles.Controllers}>
-        <input
-          className={styles.File}
-          type="file"
-          accept=".txt"
-          onChange={handleFileUpload}
-        />
+        <input className={styles.File} type="file" accept=".txt" onChange={handleFileUpload} />
 
         {/* Level filter */}
         <select
