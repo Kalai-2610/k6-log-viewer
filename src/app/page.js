@@ -29,9 +29,16 @@ export default function Home() {
             const obj = JSON.parse(line);
 
             // Format time with dynamic timezone
-            let date = new Date(obj.time).toISOString().replace("T", " ").replace(".000Z", "");
-            let msg = JSON.parse(obj.msg)
-
+            let date = new Date(obj.time)
+              .toISOString()
+              .replace('T', ' ')
+              .replace('.000Z', '');
+            let msg = {};
+            try {
+              msg = JSON.parse(obj.msg);
+            } catch (error) {
+              msg.msg = obj.msg;
+            }
             return {
               time: date,
               level: obj.level?.toUpperCase().replace('WARNING', 'WARN') || '',
@@ -40,7 +47,7 @@ export default function Home() {
               ITER: msg?.ITER,
             };
           } catch (err) {
-            console.error('Invalid log line:', line);
+            console.warn('Invalid log line:', line);
             return null;
           }
         })
@@ -59,10 +66,14 @@ export default function Home() {
   };
 
   const handleFilter = () => {
-    let data = logs.filter(
-      (item) =>
-        item.level?.includes(levelFilter) && item.message?.includes(msgFilter)
-    );
+    let data = logs;
+    if (levelFilter || msgFilter) {
+      data = logs.filter(
+        (item) =>
+          item.level?.includes(levelFilter) && item.message?.includes(msgFilter)
+      );
+    }
+
     if (vuFilter) {
       data = data.filter((item) => item?.VU == vuFilter);
     }
@@ -78,7 +89,12 @@ export default function Home() {
     <>
       <div className={styles.Header}>K6 Log Viewer</div>
       <div className={styles.Controllers}>
-        <input className={styles.File} type="file" accept=".txt" onChange={handleFileUpload} />
+        <input
+          className={styles.File}
+          type="file"
+          accept=".txt"
+          onChange={handleFileUpload}
+        />
 
         {/* Level filter */}
         <select
@@ -174,6 +190,12 @@ export default function Home() {
           </div>
         ))}
       </div>
-    </>
+      {
+        filteredLogs && filteredLogs.length != logs.length &&
+        <div className={styles.Count}>
+          {`Showing ${filteredLogs.length} of ${logs.length} Logs`}
+        </div>
+      }
+</>
   );
 }

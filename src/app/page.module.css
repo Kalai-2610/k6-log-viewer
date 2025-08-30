@@ -2,25 +2,28 @@
   display: flex;
   font-size: large;
   justify-content: center;
-  padding: 1em 1em 0em 1em;
 }
 
 .Controllers {
-  font-family: 'Courier New', Courier, monospace;
   display: flex;
-  padding: 1em 1em 0em 1em;
   align-items: center;
+  gap: 0.5em;
 }
 
-.LevelFilter, .MessageFilter,.VUFilter, .ITERFilter, .Clear{
+.File, .LevelFilter, .MessageFilter,.VUFilter, .ITERFilter, .Clear{
   color: var(--foreground);
   background-color: var(--background);
+  font-family: inherit;
+}
+
+.File {
+  flex: 1;
+  max-width: 16em;
 }
 
 .LevelFilter{
   border: none;
   font-weight: bold;
-  margin: 0 1em 0 0;
 }
 
 .MessageFilter{
@@ -34,7 +37,6 @@
 .VUFilter, .ITERFilter {
   border: none;
   font-weight: bold;
-  margin: 0 0 0 1em;
   padding: 0.4em 0.6em;
   text-align: center;
   width: 4em;
@@ -45,7 +47,6 @@
 .Clear {
   border: none;
   border-radius: 4px;
-  margin: 0 0 0 1em;
   cursor: pointer;
   font-weight: bold;
 }
@@ -54,7 +55,6 @@
   font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
-  padding: 1em 1em 1em 1em;
   font-weight: bold;
 }
 
@@ -63,7 +63,6 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 0em 1em 1em 1em;
   overflow-y: auto;
   scroll-behavior: smooth;
   scrollbar-width: thin;
@@ -99,14 +98,7 @@
   flex: 8;
 }
 
-.VU {
-  flex: 1;
-  min-width: 3em;
-  max-width: 3em;
-  justify-content: center;
-}
-
-.ITER {
+.VU, .ITER {
   flex: 1;
   min-width: 3em;
   max-width: 3em;
@@ -124,6 +116,22 @@
 }
 .WARN {
   color: #FFD93D;
+}
+
+.Count {
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: 'Courier New', Courier, monospace;
+  background: var(--background);
+  padding: .5em;
+  border-radius: 1em;
+  pointer-events: none;
+  user-select: none;
 }
 
 .VUFilter::-webkit-outer-spin-button,
@@ -148,11 +156,11 @@
 
   .VU, .ITER {
     display: none;
-    /* visibility: hidden; */
   }
 }
 
-.File {
-  flex: 1;
-  max-width: 16em;
+@media (width < 35em) {
+  .Count {
+    display: none;
+  }
 }
