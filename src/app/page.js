@@ -2,6 +2,14 @@
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 
+const JSONStringify = (data) => {
+  try {
+    return JSON.stringify(data)
+  } catch (error) {
+    return data
+  }
+}
+
 export default function Home() {
   const [file, setFile] = useState(false);
   const [logs, setLogs] = useState([]);
@@ -29,19 +37,33 @@ export default function Home() {
             const obj = JSON.parse(line);
 
             // Format time with dynamic timezone
-            let date = new Date(obj.time).toISOString().replace('T', ' ').replace('.000Z', '');
-            let msg = {};
+            let time = new Date(obj.time).toISOString().replace('T', ' ').replace('.000Z', '');
+            let level = obj.level?.toUpperCase()?.replace('WARNING', 'WARN');
+            let message = {};
+            let VU;
+            let ITER;
             try {
-              msg = JSON.parse(obj.msg);
+              message = JSON.parse(obj.msg);
+              VU = message?.VU;
+              ITER = message?.ITER;
+              message = message?.message;
             } catch (error) {
-              msg.msg = obj.msg;
+              delete obj.level;
+              delete obj.time;
+              delete obj.source;
+              let keys = Object.keys(obj)
+              if (keys.length === 1) {
+                message = obj[keys[0]];
+              } else {
+                message =  keys.map(key => key + " = " + JSONStringify(obj[key])).join("\n");
+              }
             }
             return {
-              time: date,
-              level: obj.level?.toUpperCase().replace('WARNING', 'WARN') || '',
-              message: msg?.msg,
-              VU: msg?.VU,
-              ITER: msg?.ITER,
+              time,
+              level,
+              message,
+              VU,
+              ITER
             };
           } catch (err) {
             console.warn('Invalid log line:', line);
@@ -56,21 +78,20 @@ export default function Home() {
       setVuFilter('');
       setIterFilter('');
     };
-
+    
     reader.readAsText(file);
-
+    
     setFile(true);
   };
 
   const handleFilter = () => {
     let data = logs;
-    if (levelFilter || msgFilter) {
-      data = logs.filter(
-        (item) =>
-          item.level?.includes(levelFilter) && item.message?.includes(msgFilter)
-      );
+    if (levelFilter ) {
+      data = data.filter((item) => item.level?.includes(levelFilter));
     }
-
+    if(msgFilter) {
+      data = data.filter((item) => item.message?.includes(msgFilter));
+    }
     if (vuFilter) {
       data = data.filter((item) => item?.VU == vuFilter);
     }
