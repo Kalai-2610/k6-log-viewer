@@ -104,6 +104,8 @@
 
 .Message {
   flex: 8;
+  overflow-wrap: anywhere;
+  white-space:  pre-wrap;
 }
 
 .VU, .ITER {
